@@ -39,7 +39,7 @@ namespace Agenda.Controllers
             }
 
             var agenda = await _context.Agenda
-                .FirstOrDefaultAsync(m => m.AgendaId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (agenda == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace Agenda.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AgendaId,Nome,Sobrenome,Telefone")] Models.Agenda agenda)
+        public async Task<IActionResult> Create([Bind("AgendaId,Nome,Email,Telefone")] Models.Agenda agenda)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,9 @@ namespace Agenda.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AgendaId,Nome,Sobrenome,Telefone")] Models.Agenda agenda)
+        public async Task<IActionResult> Edit(int id, [Bind("AgendaId,Nome,Email,Telefone")] Models.Agenda agenda)
         {
-            if (id != agenda.AgendaId)
+            if (id != agenda.Id)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace Agenda.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AgendaExists(agenda.AgendaId))
+                    if (!AgendaExists(agenda.Id))
                     {
                         return NotFound();
                     }
@@ -130,7 +130,7 @@ namespace Agenda.Controllers
             }
 
             var agenda = await _context.Agenda
-                .FirstOrDefaultAsync(m => m.AgendaId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (agenda == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace Agenda.Controllers
 
         private bool AgendaExists(int id)
         {
-            return _context.Agenda.Any(e => e.AgendaId == id);
+            return _context.Agenda.Any(e => e.Id == id);
         }
         
             
